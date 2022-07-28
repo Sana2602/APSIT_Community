@@ -32,8 +32,6 @@ class MyDocument extends Document {
             rel="stylesheet"
             href="https://fonts.googleapis.com/icon?family=Material+Icons"
           />
-          {/* eslint-disable-next-line @next/next/no-title-in-document-head */}
-          <title></title>
         </Head>
         <body>
           <Main />
