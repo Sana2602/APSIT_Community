@@ -3,31 +3,24 @@ import {
   Button,
   Card,
   Container,
-  createTheme,
   Stack,
   TextField,
-  ThemeProvider,
   Typography,
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-
-const theme = createTheme({
-  typography: {
-    fontFamily: ['"Poppins"', "Roboto", "Arial", "sans-serif"].join(","),
-  },
-});
+import Head from "next/head";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 
 export default function IndexPage() {
   //Def
-  // const usernameRef = useRef("");
   const moodleIdRef = useRef("");
   const passwordRef = useRef("");
 
   //states
-  // const [usernameError, setUsernameError] = useState(false);
   const [moodleError, setMoodleError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
 
@@ -35,12 +28,10 @@ export default function IndexPage() {
     e.preventDefault();
 
     //Take values from inputs
-    // const enteredUsername = usernameRef.current.value;
     const enteredMoodleId = moodleIdRef.current.value;
     const enteredPassword = passwordRef.current.value;
 
     //Show Error
-    // !enteredUsername ? setUsernameError(true) : setUsernameError(false);
     !enteredMoodleId || isNaN(enteredMoodleId) || enteredMoodleId.length !== 8
       ? setMoodleError(true)
       : setMoodleError(false);
@@ -50,26 +41,14 @@ export default function IndexPage() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Container height="100vh">
-        <Box textAlign={"center"}>
-          <Image
-            src={"/community.svg"}
-            alt="Community Logo"
-            height="60px"
-            width="60px"
-          />
-          <Typography variant={"h6"} color="black" fontWeight={600}>
-            APSIT Community
-          </Typography>
-        </Box>
-        <Typography
-          m={2}
-          variant={"h3"}
-          textAlign={"center"}
-          color="black"
-          fontWeight={700}
-        >
+    <>
+      <Header />
+      <Head>
+        <title>Signin to APSIT Community</title>
+        <meta name={"description"} content={"Signin to APSIT Community"} />
+      </Head>
+      <Box mt={8}>
+        <Typography m={2} variant={"h3"} textAlign={"center"} fontWeight={700}>
           Welcome back, we missed you!
         </Typography>
         <form id="signIn_form">
@@ -80,13 +59,7 @@ export default function IndexPage() {
               width: "max-content",
             }}
           >
-            <Typography
-              mb={2}
-              align={"center"}
-              variant={"h5"}
-              color="black"
-              fontWeight={500}
-            >
+            <Typography mb={2} align={"center"} variant={"h5"} fontWeight={500}>
               Please login to continue
             </Typography>
             <Stack
@@ -146,7 +119,8 @@ export default function IndexPage() {
             </Stack>
           </Card>
         </form>
-      </Container>
-    </ThemeProvider>
+      </Box>
+      <Footer />
+    </>
   );
 }
